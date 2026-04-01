@@ -23,4 +23,4 @@ Este é um sistema full-stack de agendamento com design moderno (Cyberpunk/Dark 
 - Inicie a aplicação: `npm run dev`
 
 ## Demonstração
-![Agendador de Horário](./meu-front-crud/src/assets/hero.png)
+![Agendador de Horário](./meu-front-crud/src/assets/Agendador-Horario.png)
