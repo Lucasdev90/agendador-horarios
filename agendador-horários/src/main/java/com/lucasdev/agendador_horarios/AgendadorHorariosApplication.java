@@ -1,7 +1,11 @@
 package com.lucasdev.agendador_horarios;
 
+
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
 
 @SpringBootApplication
 public class AgendadorHorariosApplication {
@@ -11,3 +15,5 @@ public class AgendadorHorariosApplication {
 	}
 
 }
+
+

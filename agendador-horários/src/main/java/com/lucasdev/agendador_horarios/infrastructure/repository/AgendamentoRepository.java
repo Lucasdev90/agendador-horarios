@@ -3,15 +3,19 @@ package com.lucasdev.agendador_horarios.infrastructure.repository;
 import com.lucasdev.agendador_horarios.infrastructure.entity.Agendamento;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDateTime;
+import java.util.List;
+
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long > {
 
 
-    Agendamento findByDataHoraAgendamentoAndCliente(LocalDateTime dataHoraAgendamento, String cliente);
+    Agendamento findByDataHoraAgendamentoAndCliente
+            (LocalDateTime dataHoraAgendamento, String cliente);
 
-    Agendamento findByServicoAndDataHoraAgendamentoBetween(String servico, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFinal);
+
+    List<Agendamento> findByServicoAndDataHoraAgendamentoBetween
+            (String servico, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFinal);
 
 
     @Transactional
@@ -19,7 +23,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long >
             (LocalDateTime dataHoraAgendamento,String cliente );
 
 
-    Agendamento findByDataHoraAgendamentoBetween(LocalDateTime dataHoraInicial, LocalDateTime dataHoraFinal);
+    List<Agendamento> findByDataHoraAgendamentoBetween(LocalDateTime dataHoraInicial, LocalDateTime dataHoraFinal);
 
 
 }

@@ -4,11 +4,11 @@ import com.lucasdev.agendador_horarios.infrastructure.entity.Agendamento;
 import com.lucasdev.agendador_horarios.infrastructure.repository.AgendamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +22,11 @@ public class AgendamentoService {
         LocalDateTime horaAgendamento = agendamento.getDataHoraAgendamento();
         LocalDateTime horaFim = agendamento.getDataHoraAgendamento().plusHours(1);
 
-        Agendamento agendados = agendamentoRepository.findByServicoAndDataHoraAgendamentoBetween
+        List<Agendamento> agendados = agendamentoRepository.findByServicoAndDataHoraAgendamentoBetween
                 (agendamento.getServico(), horaAgendamento, horaFim);
 
 
-        if (Objects.nonNull(agendados)) {
+        if (! agendados.isEmpty()) {
             throw new RuntimeException("Horário já está preenchido");
         }
         return agendamentoRepository.save(agendamento);
@@ -38,12 +38,11 @@ public class AgendamentoService {
     }
 
 
-    public Agendamento buscarAgendamentosDia(LocalDate data) {
+    public List<Agendamento> buscarAgendamentosDia(LocalDate data) {
         LocalDateTime primeiraHoraDia = data.atStartOfDay();
         LocalDateTime horaFinalDia = data.atTime(23, 59, 59);
 
-        return agendamentoRepository.findByDataHoraAgendamentoBetween
-                (primeiraHoraDia, horaFinalDia);
+        return agendamentoRepository.findByDataHoraAgendamentoBetween(primeiraHoraDia, horaFinalDia);
     }
 
 
@@ -58,6 +57,10 @@ public class AgendamentoService {
         agendamento.setId(agenda.getId());
         return agendamentoRepository.save(agendamento);
 
+    }
+
+    public List<Agendamento> listarTodos(){
+        return agendamentoRepository.findAll();
     }
 
 }

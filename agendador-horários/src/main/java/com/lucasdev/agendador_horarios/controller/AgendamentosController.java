@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin (origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/agendamentos")
 @RequiredArgsConstructor
@@ -35,8 +36,14 @@ public class AgendamentosController {
 
     @GetMapping
 
-    public ResponseEntity<Agendamento> buscarAgendamentosDia(@RequestParam LocalDate data){
+    public ResponseEntity<List<Agendamento>> buscarAgendamentosDia(@RequestParam LocalDate data){
         return ResponseEntity.ok().body(agendamentoService.buscarAgendamentosDia(data));
+    }
+
+    @GetMapping("/todos")
+
+    public ResponseEntity<List<Agendamento>> listarTudo(){
+        return ResponseEntity.ok().body(agendamentoService.listarTodos());
     }
 
     @PutMapping
